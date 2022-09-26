@@ -1,0 +1,57 @@
+1]WAQTD maximum salary given to a manager
+=> SELECT MAX(SAL)
+   FROM EMP
+   WHERE JOB='MANAGER';
+
+2]WAQTD minimum salary of employee if they are working as a clerk in dept 10,20
+=> SELECT MAX(SAL)
+   FROM EMP
+   WHERE JOB='CLERK' AND DEPTNO IN (10,20)
+
+3]WAQTD number of employees earning a salary more than 1500 and having character e in their names
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL >1500 AND ENAME LIKE '%E%';
+
+4]WAQTD total salary given to employees in dept 10
+=> SELECT SUM(SAL)
+   FROM EMP
+   WHERE DEPTNO=10
+
+5]WAQTD number of jobs present in employee table
+=> SELECT COUNT(DISTINCT JOB)
+   FROM EMP;
+
+6]WAQTD average salary, total salary, number of employees and maximum salary given to employees working as president
+=> SELECT AVG(SAL),MAX(SAL),SUM(SAL)
+   FROM EMP
+   WHERE JOB='PRESIDENT';
+
+7]WAQTD number of employees getting salary less than 2000 in dept 10
+=> SELECT COUNT(DISTINCT ENAME)
+   FROM EMP
+   WHERE SAL < 2000;
+
+8]WAQTD total salary needed to pay employees working as clerk
+=> SELECT SUM(SAL)
+   FROM EMP
+   WHERE JOB='CLERK';
+
+9]WAQTD avereage salary needed to pay for all employees
+=> SELECT AVG(SAL)
+   FROM EMP;
+
+10]WAQTD total salary needed to pay employees who hired in feb
+=> SELECT SUM(SAL)
+   FROM EMP
+   WHERE HIREDATE LIKE '%FEB%';
+
+11]WAQTD number of employees who are reporting to 7839
+=> SELECT COUNT(ENAME)
+   FROM EMP
+   WHERE MGR=7839;
+
+12]WAQTD number of employees getting comission in dept 30
+=>  SELECT COUNT(ENAME)
+    FROM EMP
+    WHERE DEPTNO=30;
