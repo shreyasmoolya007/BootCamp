@@ -1,0 +1,55 @@
+1]WAQTD number of employees working in each dept if there are atleast 2 employees working in each dept
+=> SELECT COUNT(ENAME),DEPTNO
+   FROM EMP
+   GROUP BY DEPTNO
+   HAVING COUNT(ENAME)>=2;
+
+2]WAQTD the designation in which there are two employees present
+=> SELECT JOB,COUNT(*)
+   FROM EMP
+   GROUP BY JOB
+   HAVING COUNT(*) = 2;
+
+3]WAQTD the names that are repeated in employee table
+=> SELECT COUNT(*),ENAME
+   FROM EMP
+   GROUP BY ENAME
+   HAVING COUNT(*) >1;
+
+4]WAQTD the names which are repeated exactly twice
+=> SELECT COUNT(*),ENAME
+   FROM EMP
+   GROUP BY ENAME
+   HAVING COUNT(*)=2;
+
+5]WAQTD the salaries that are repeated in employee table
+=> SELECT COUNT(*),SAL
+   FROM EMP
+   GROUP BY SAL
+   HAVING COUNT(*)>1;
+
+6]WAQTD job wise maximum salary if the maximum salary of each job exceeds 2000
+=> SELECT COUNT(JOB),MAX(SAL)
+   FROM EMP
+   GROUP BY JOB
+   HAVING MAX(SAL) > 2000;
+
+7]WAQTD department number if there are atleast 3 employees in each dept whose name has character a or s in their name
+=> SELECT COUNT(ENAME),DEPTNO
+   FROM EMP
+   WHERE ENAME LIKE '%A%' OR ENAME LIKE'%S%'
+   GROUP BY DEPTNO
+   HAVING COUNT(ENAME) > 3;
+
+8]WAQTD minimum and maximum salaries of each job if min sal is more than 3500 and max sal is less than 5000
+=> SELECT MAX(SAL),MIN(SAL),JOB
+   FROM EMP
+   GROUP BY JOB
+   HAVING MAX(SAL)<5000 AND MIN(SAL)>3500;
+
+9]WAQTD number of employees earnimg salary more than 1200 in each job and the total salary needed to pay employee of each job must exceed 3500
+=> SELECT COUNT(ENAME),JOB
+   FROM EMP
+   WHERE SAL > 1200
+   GROUP BY JOB
+   HAVING SUM(SAL)>=3500;

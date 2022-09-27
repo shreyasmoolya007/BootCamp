@@ -1,0 +1,65 @@
+1]WAQTD number of employees working in each department
+=> SELECT ENAME, COUNT(*)
+   FROM EMP
+   GROUP BY ENAME;
+
+2]WAQTD number of employees working in each department except the employees working as analyst
+=> SELECT COUNT(*), DEPTNO
+   FROM EMP
+   WHERE JOB NOT IN 'ANALYST'
+   GROUP BY DEPTNO;
+
+3]WAQTD maximum salary given to each job
+=> SELECT MAX(SAL),JOB
+   FROM EMP
+   GROUP BY JOB;
+
+4]WAQTD number of employees getting commision in each dept
+=> SELECT DEPTNO,COUNT(COMM)
+   FROM EMP
+   GROUP BY DEPTNO
+
+5]WAQTD number of employees working in each dept except president
+=> SELECT DEPTNO,COUNT(ENAME)
+   FROM EMP
+   WHERE JOB!='PRESIDENT'
+   GROUP BY DEPTNO;
+
+6]WAQTD total salary needed to pay all the employee in each job
+=> SELECT JOB,SUM(SAL)
+   FROM EMP
+   GROUP BY JOB;
+
+7]WAQTD number of employees working as manager in each dept
+=> SELECT DEPTNO,COUNT(ENAME)
+   FROM EMP
+   WHERE JOB='MANAGER'
+   GROUP BY DEPTNO;
+
+8]WAQTD average salary needed to pay all the employees in each dept excluding the employees of dept no 20
+=> SELECT DEPTNO,AVG(SAL)
+   FROM EMP
+   WHERE DEPTNO!=20
+   GROUP BY DEPTNO;
+
+9]WAQTD number of employees having character a in their name
+=> SELECT COUNT(ENAME)
+   FROM EMP
+   WHERE ENAME LIKE'%A%'
+   GROUP BY ENAME;
+
+10]WAQTD number of employees and average salary needed to pay the employees whose salary is greater than 2000 in each dept
+=> SELECT COUNT(ENAME),AVG(SAL),DEPTNO
+   FROM EMP
+   WHERE SAL > 2000
+   GROUP BY DEPTNO;
+
+11]WAQTD number of times the salaries present in employee table
+=> SELECT COUNT(SAL),SAL
+   FROM EMP
+   GROUP BY SAL;
+
+12]WAQTD total salary needed to pay and number of salesman in each dept
+=> SELECT SUM(SAL),COUNT(ENAME),DEPTNO
+   FROM EMP
+   GROUP BY DEPTNO;
