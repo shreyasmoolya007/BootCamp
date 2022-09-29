@@ -1,0 +1,16 @@
+1]WAQTD employees who are earning salary more than salesman
+=>  SELECT ENAME
+    FROM EMP
+    WHERE SAL> ALL (SELECT SAL FROM EMP WHERE JOB='SALESMAN');
+
+2]Display ename , sal of employees who are earning more than any of the analyst
+=> SELECT ENAME,SAL
+   FROM EMP
+   WHERE SAL > ANY (SELECT SAL FROM EMP WHERE JOB='ANALYST');
+
+3]WAQTD 3rd max salary
+=> SELECT MAX(SAL)
+   FROM EMP
+   WHERE SAL<(SELECT MAX(SAL) FROM EMP WHERE SAL<(SELECT MAX(SAL) FROM EMP));
+
+4]Display the loc of employees who are earning second max salary
