@@ -1,0 +1,73 @@
+1]WAQTD name of the employees wwho are earning the salary more than smith
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL > 
+   (SELECT SAL
+    FROM EMP
+    WHERE ENAME='SMITH');
+
+2]WAQTD names of the employees who are earning the salary less than ford
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL < 
+   (SELECT SAL
+    FROM EMP
+    WHERE ENAME='FORD');
+
+3]WAQTD details of employees who are earning salary more than king and less than miller
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL > (SELECT SAL
+   FROM EMP
+   WHERE ENAME='KING') AND SAL < (SELECT SAL
+   FROM EMP
+   WHERE ENAME='MILLER');
+
+4]WAQTD name ,sal , deptno, if the employee earns more than 2000 and works in the same dept as james
+=> SELECT ENAME,SAL,DEPTNO
+   FROM EMP
+   WHERE SAL>2000 AND DEPTNO=(SELECT DEPTNO FROM EMP WHERE ENAME='JAMES');
+
+5]WAQTD name and hiredate of all the employees hired after 1980 but before king
+=> SELECT ENAME,HIREDATE
+   FROM EMP
+   WHERE HIREDATE > '31-DEC-1979' AND HIREDATE < (SELECT HIREDATE FROM EMP WHERE ENAME='KING');
+
+6]WAQTD ename , sal , and designation of the employees whose annual salary is more than smith and less than king
+=> SELECT ENAME,SAL,JOB
+   FROM EMP
+   WHERE SAL*12 > (SELECT SAL*12 FROM EMP WHERE ENAME='SMITH') AND SAL*12 < (SELECT SAL*12 FROM EMP WHERE ENAME='KING');
+
+7]WAQTD dept name of smith
+=> SELECT DNAME
+   FROM DEPT
+   WHERE DEPTNO=(SELECT DEPTNO FROM EMP WHERE ENAME='SMITH');
+
+8]WAQTD location of allen
+=> SELECT LOC
+   FROM DEPT
+   WHERE DEPTNO=(SELECT DEPTNO FROM EMP WHERE ENAME='ALLEN');
+
+9]WAQTD name and salaries of the employees if the employees are working in loc chicago
+=> SELECT ENAME, SAL
+   FROM EMP
+   WHERE DEPTNO=(SELECT DEPTNO FROM DEPT WHERE LOC='CHICAGO');
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+SINGLE ROW AND MULTI ROW SUB QUERY
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10]WAQTD employee name if the employee is hired between 81 to 84 and both earning commission in dept no 20 and working in the operations dept
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL>(SELECT SAL FROM EMP WHERE ENAME='SCOTT') AND DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME='ACCOUNTING');
+
+11]WAQTD employees earning more than scott in accountat dept
+=> SELECT ENAME
+   FROM EMP
+   WHERE SAL>(SELECT SAL FROM EMP WHERE ENAME='SCOTT') AND DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME='ACCOUNTING');
+
+12]List the dept name that are having atleast 3 employees but not more than 5 employees in it
+=> SELECT DNAME
+   FROM DEPT
+   WHERE DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*)>=3 AND COUNT(*)<=5);
