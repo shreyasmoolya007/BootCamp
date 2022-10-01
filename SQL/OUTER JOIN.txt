@@ -1,0 +1,120 @@
+SYNTAX
+
+SELECT COLUMN_NAME
+FROM TABLE_NAME LEFT [OUTER] JOIN TABLE_NAME;
+ON < JOIN_CONDITION>; 
+
+1] SELECT *
+   FROM EMP LEFT JOIN DEPT
+   ON EMP.DEPTNO = DEPT.DEPTNO;
+
+FULL-OUTER JOIN
+
+1] SELECT *
+   FROM EMP FULL JOIN DEPT
+   ON EMP.DEPTNO=DEPT.DEPTNO;
+
+SELF JOIN
+
+1] SELECT *
+   FROM EMP E1 JOIN EMP E2
+   ON E1.MGR = E2.EMPNO;
+
+----------------------------------------------------------------------------------
+
+1]WAQTD employee name and manager name for all the names
+=> SELECT E1.ENAME, E2.ENAME
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR = E2.EMPNO;
+
+2]WAQTD emoployee name , salary along with managers name with salary for all the employees
+=> SELECT E1.ENAME,E1.SAL,E2.ENAME,E2.SAL
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR=E2.EMPNO;
+
+3]WAQTD employee name , managers job if manager works as a analyst
+=> SELECT E1.ENAME, E2.JOB
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR = E2.EMPNO AND E2.JOB='ANALYST';
+
+4]WAQTD employee name , managers name along with their job if employee and manager are working in same designation
+=> SELECT E1.ENAME,E1.JOB,E2.ENAME,E2.JOB
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR=E2.EMPNO AND E1.JOB = E2.JOB;
+
+5]WAQTD name of the employee and his managers name if employee is working as clerk
+=> SELECT E1.ENAME,E2.ENAME
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR=E2.EMPNO AND E1.JOB='CLERK';
+
+6]WAQTD employees name and managers salary for all the employees if managers salary ends with 50
+=> SELECT E1.ENAME, E2.SAL
+   FROM EMP E1, EMP E2
+   WHERE E1.MGR=E2.EMPNO AND E2.SAL LIKE '%50';
+
+7]WAQTD employees name and managers designation for all the employees
+=> SELECT E1.ENAME,E2.JOB
+   FROM EMP E1,EMP E2
+   WHERE E1.MGR = E2.EMPNO;
+
+8]WAQTD EMP NAME AND MANAGER NAME ALONG WITH THEIR ANNUAL SALARIES IF EMPLOYEE WORKS IN DEPT 10, 20 AND MANAGER'S SAL IS GREATER THAN EMPLOYEES SALARY.
+
+9]WAQTD employee name, employee hiredate, manager hiredate if manager was hired before th employee into accounting department
+
+10]WAQTD employees name managers name managers manager name
+=> SELECT E1.ENAME,E2.ENAME,E3.ENAME
+   FROM EMP E1, EMP E2,EMP E3
+   WHERE E1.MGR=E2.EMPNO AND E2.MGR=E3.EMPNO;
+
+11]WAQTD employee name, employeess dept name, manager name his dept name if manager is hired before 1982
+
+12]WAQTD employee name with his dept name managers name with his dept name,
+   managers name with his dept name if employee works in dept no 10 and earning
+   salary less than 5000 and employee has 'l' as a 3rd character in his name and
+   manager works as a analyst in research dept and hired before the employee and
+   manageers manager earning the same salary as manager and working in the location dallus
+=> SELECT E1.ENAME, D1.DNAME, E2.ENAME, D2.DNAME, E3.ENAME, D3.DNAME
+   FROM EMP E1, EMP E2, EMP E3, DEPT D1, DEPT D2, DEPT D3
+   WHERE E1.MGR = E2.EMPNO
+   AND E2.MGR = E3.EMPNO
+   AND E1.DEPTNO = 10
+   AND E1.SAL < 5000
+   AND E1.ENAME LIKE '__L%'
+   AND E2.JOB = 'ANALYST'
+   AND E1.DEPTNO = D1.DEPTNO
+   AND E2.DEPTNO = D2.DEPTNO
+   AND E3.DEPTNO = D3.DEPTNO
+   AND D2.DNAME = 'RESEARCH'
+   AND E2.HIREDATE < E1.HIREDATE
+   AND E3.SAL = E2.SAL
+   AND D3.LOC = 'DALLAS';
+
+12]WAQTD 40th max salary
+
+13]WAQTD emp details if the employee is working as the salesman and earning salary greater
+  than 2000 and hired in the month of december, manager earning the salary less than 5000
+  and not earning commission and manager works as a analyst in dept no 20 if manager works
+  in the location newyork and employee is working in the location chicago and manager manager
+  hired in the month of august and earning commission and works in the dept 30 and earning
+  the sal greater than mgr salary and working in the loc boston
+=> SELECT *
+   FROM EMP E1, EMP E2, EMP E3, DEPT D1, DEPT D2, DEPT D3
+   WHERE E1.JOB = 'SALESMAN'
+   AND E1.SAL > 2000
+   AND E1.HIREDATE LIKE '%DEC%'
+   AND E1.MGR = E2.EMPNO
+   AND E2.JOB = 'ANALYTIC'
+   AND E2.SAL < 5000
+   AND E2.COMM IS NULL
+   AND E2.DEPTNO = 20
+   AND E1.DEPTNO = D1.DEPTNO
+   AND E2.DEPTNO = D2.DEPTNO
+   AND D2.LOC = 'NEW YORK'
+   AND D1.LOC = 'CHICAGO'
+   AND E2.MGR = E3.EMPNO
+   AND E3.HIREDATE LIKE '%AUG%'
+   AND E3.COMM IS NOT NULL
+   AND E3.DEPTNO = 30
+   AND E3.SAL > E2.SAL
+   AND E3.DEPTNO = D3.DEPTNO
+   AND D3.LOC = 'BOSTON';
